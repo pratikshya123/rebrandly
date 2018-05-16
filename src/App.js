@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 //router
 import {BrowserRouter,Redirect,Route,Switch} from 'react-router-dom'
 import DashBoard from './component/DashBoard'
-//import Login from './component/Login';
+import Login from './component/Login';
 class App extends Component {
   render() {
     return (
@@ -15,7 +15,7 @@ class App extends Component {
         <BrowserRouter>
         	<Switch>
         		<Route path="/login" component={Login} /> 
-        		
+        		<Route exact path="/" render={()=>(<Redirect to="/Login"/>)}/>
         		<Route path="/dashboard" component={DashBoard} />
         	</Switch>
         </BrowserRouter>

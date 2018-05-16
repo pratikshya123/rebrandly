@@ -3,10 +3,13 @@ import React, {Component} from 'react'
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
+import AccountIcon from './AccountIcon';
 class Header extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {open: false};
+		this.state = {open: false,
+			email:''
+		};
 	}
 		 handleToggle = () => this.setState({open: !this.state.open});
 
@@ -16,7 +19,7 @@ class Header extends Component {
 				<AppBar
 				title="Rebrandly"
 				onLeftIconButtonClick={()=>this.handleToggle()}
-
+				iconElementRight={<AccountIcon email={this.state.email} />}
 				/>
 				<Drawer
 				open={this.state.open}
@@ -29,6 +32,11 @@ class Header extends Component {
 				</Drawer>
 				</div>
 				)
+		}
+		componentWillMount(){
+			this.setState({
+				email:sessionStorage.getItem('email')
+			})
 		}
 	
 }

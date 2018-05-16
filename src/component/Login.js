@@ -74,6 +74,25 @@ class Login extends Component{
 				}
 			})
 		}
+		componentWillMount()
+			{
+				const apikeysession=sessionStorage.getItem('apikey')
+				if(apikeysession){
+					this.validapikey(apikeysession)
+				.then(response=>{
+					if(response){
+						this.props.history.push('/dashboard')
+
+					}
+				})
+				}
+			}
+		validapikey(apikey){
+			return fetch('https://api.rebrandly.com/v1/account',
+				{
+					headers:{apikey:this.state.apikey}
+				})
+		}
 
 	}
 	export default Login;
