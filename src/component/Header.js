@@ -4,6 +4,12 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import AccountIcon from './AccountIcon';
+
+
+import { Link } from 'react-router-dom'
+
+
+
 class Header extends Component {
 	constructor(props) {
 		super(props);
@@ -27,8 +33,10 @@ class Header extends Component {
 				onRequestChange={()=>this.handleToggle()}
 				>
 				
-				<MenuItem>Menu Item</MenuItem>
-				<MenuItem>Menu Item 2</MenuItem>
+				<MenuItem> <Link to="/dashboard">Home</Link>
+				</MenuItem>
+				<MenuItem> <Link to="/link">Link</Link>
+				</MenuItem>
 				</Drawer>
 				</div>
 				)
