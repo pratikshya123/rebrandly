@@ -8,6 +8,7 @@ class DashBoard extends Component{
 		return(
 			<div>
 				<Header />
+				<Body/>
 			</div>
 			)
 

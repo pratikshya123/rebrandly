@@ -1,0 +1,10 @@
+fetch("url",{
+    headers:{
+        apiKey:key
+    },
+    method:"POST",
+    body:JSON.stringify({destination:"sdf"})
+})
+.then(data=>{
+    
+})
