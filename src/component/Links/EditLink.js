@@ -2,14 +2,15 @@ import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import Header from './Header';
+import Header from '../Header';
 //import RebrandlyApi from '../../sevices/rebrandlyApi';
 
-class CreateLinks extends Component{
+class EditLink extends Component{
 	constructor(props) {
 		super(props)
 
 		this.state ={
+			id: this.props.match.params.id,
 			title:'',
 			destination:'',
 		}
@@ -27,7 +28,7 @@ class CreateLinks extends Component{
 			<div style={this.alignCenter}>
 		
 			<Card>
-			<CardHeader title={<strong>Create Form</strong>}/>
+			<CardHeader title={<strong>Edit Form</strong>}/>
 			<CardText>
 			<TextField
 			hintText="Title" 
@@ -57,7 +58,7 @@ class CreateLinks extends Component{
 			destination:this.state.destination
 		}
 	
-		fetch ('https://api.rebrandly.com/v1/links',{
+		fetch ('https://api.rebrandly.com/v1/links/${this.state.id}',{
 			method:'POST'	,
 			headers:{
 				apikey:apikey,
@@ -78,5 +79,33 @@ class CreateLinks extends Component{
 		})
 		
 	}
+	componentWillMount() {
+		const apikey=sessionStorage.getItem('apikey')
+		//console.log(this.props.match.params.id)
+		//const id = this.props.match.params.id;
+		fetch ('https://api.rebrandly.com/v1/links/${this.state.id}',{
+			headers:{
+				apikey:apikey
+			}
+		})
+		.then(response =>{
+			if(response.ok){
+				response.json()
+				.then (links =>{
+					
+				this.setState({
+					title: links.title,
+					destination:links.destination
+				})
+				})
+			}
+			else {
+				alert(response.statusText)
+			}
+		})
+	
+	}
+
 }
-export default CreateLinks;
+
+export default EditLink;

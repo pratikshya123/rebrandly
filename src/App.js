@@ -9,6 +9,7 @@ import DashBoard from './component/DashBoard'
 import Login from './component/Login';
 import RebrandlyLinks from './component/Links/RebrandlyLinks';
 import CreateLinks from './component/CreateLinks';
+import EditLink from './component/Links/EditLink'
 class App extends Component {
   render() {
     return (
@@ -19,9 +20,9 @@ class App extends Component {
         		<Route path="/login" component={Login} /> 
         		<Route exact path="/" render={()=>(<Redirect to="/Login"/>)}/>
         		<Route path="/dashboard" component={DashBoard} />
-        		<Route path="/link" component={RebrandlyLinks} />
-        		<Route path="/createlink" component={CreateLinks} />
-        		
+        		<Route exact path="/link" component={RebrandlyLinks} />
+        		<Route path="/link/new" component={CreateLinks} />
+        		<Route path="/link/:id/edit" component={EditLink} />
         	</Switch>
         </BrowserRouter>
         

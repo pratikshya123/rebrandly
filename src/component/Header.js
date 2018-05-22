@@ -35,7 +35,7 @@ class Header extends Component {
 				</MenuItem>
 				<MenuItem > <Link to="/link" style={{ textDecoration: 'none'}}>Link</Link>
 				</MenuItem>
-				<MenuItem > <Link to="/createlink" style={{ textDecoration: 'none'}}>createlink</Link>
+				<MenuItem > <Link to="/link/new" style={{ textDecoration: 'none'}}>createlink</Link>
 				</MenuItem>
 				 
 				</Drawer>
