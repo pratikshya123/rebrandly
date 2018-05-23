@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { BottomNavigationItem} from 'material-ui/BottomNavigation';
+//import { BottomNavigationItem} from 'material-ui/BottomNavigation';
 import EditIcon from 'material-ui/svg-icons/image/edit';
+import DeleteIcon from 'material-ui/svg-icons/action/delete';
+import IconButton from 'material-ui/IconButton';
 import {
 	Table,
 	TableBody,
@@ -40,11 +42,14 @@ class RebrandlyLinks extends Component{
 					<TableRowColumn>{link.destination}</TableRowColumn>
 					<TableRowColumn>{link.shortUrl}</TableRowColumn>
 					<TableRowColumn>
-					<BottomNavigationItem
-					label="Edit"
-					icon={<EditIcon />}
-					 onClick={() => this.props.history.push(`/link/${link.id}/edit`)}
-               />
+     				 <IconButton
+                   onClick={() => this.props.history.push(`/link/${link.id}/edit`)} >
+                    <EditIcon />
+                  </IconButton>
+                   <IconButton
+                 onClick={() => this.deleteLink(link.id)} >
+                    <DeleteIcon />
+                  </IconButton>
                 </TableRowColumn>
 					</TableRow>
 					)
@@ -56,25 +61,12 @@ class RebrandlyLinks extends Component{
 			);
 	}
 	componentWillMount()
-	// 	fetch('https://api.rebrandly.com/v1/links',
-	// 	{
-	// 		headers:{apikey:sessionStorage.getItem('apikey')}
-	// 	})
-
-	// 	.then(res=>{
-	// 		if(res.ok){
-	// 			res.json()
-	// 			.then(data=>{
-	// 				this.setState({
-	// 					links:data
-	// 				})
-	// 			})
-	// 		}
-	// 	})
-
-
-	// }
+	
 	{
+		this.listlink()
+	}
+	
+	listlink(){
 		const apikeysession=sessionStorage.getItem('apikey')
 		debugger
 		if(apikeysession){
@@ -91,6 +83,27 @@ class RebrandlyLinks extends Component{
 			}
 		})
 		}
+	}
+	deleteLink(LinkID){
+		const apikey=sessionStorage.getItem('apikey')
+		fetch(`https://api.rebrandly.com/v1/links/${LinkID}`,{
+			headers:{apikey:apikey,
+			'Content-Type':'application/json'
+			},
+			method:'delete'
+
+		})
+		.then(response=>{
+			if(response.ok){
+				response.json()
+				.then(response=>{
+					this.listlink()
+				})
+			}
+			else{
+				alert(response.statusText)
+			}
+		})
 	}
 	validapikey(apikey){
 		return fetch('https://api.rebrandly.com/v1/links',

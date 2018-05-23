@@ -58,7 +58,7 @@ class EditLink extends Component{
 			destination:this.state.destination
 		}
 	
-		fetch ('https://api.rebrandly.com/v1/links/${this.state.id}',{
+		fetch (`https://api.rebrandly.com/v1/links/${this.state.id}`,{
 			method:'POST'	,
 			headers:{
 				apikey:apikey,
@@ -83,7 +83,7 @@ class EditLink extends Component{
 		const apikey=sessionStorage.getItem('apikey')
 		//console.log(this.props.match.params.id)
 		//const id = this.props.match.params.id;
-		fetch ('https://api.rebrandly.com/v1/links/${this.state.id}',{
+		fetch (`https://api.rebrandly.com/v1/links/${this.state.id}`,{
 			headers:{
 				apikey:apikey
 			}
