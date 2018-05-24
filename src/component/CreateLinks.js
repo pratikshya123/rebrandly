@@ -76,7 +76,6 @@ class CreateLinks extends Component{
 				alert(response.statusText)
 			}
 		})
-		
 	}
 }
 export default CreateLinks;

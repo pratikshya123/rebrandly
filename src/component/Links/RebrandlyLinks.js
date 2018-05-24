@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 //import { BottomNavigationItem} from 'material-ui/BottomNavigation';
+import{ connect } from 'react-redux';
 import EditIcon from 'material-ui/svg-icons/image/edit';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconButton from 'material-ui/IconButton';
@@ -35,7 +36,7 @@ class RebrandlyLinks extends Component{
 			</TableHeader>
 			<TableBody displayRowCheckbox={false}>
 			{
-				this.state.links.map( link => {
+				this.props.lists.map( link => {
 					return(
 					<TableRow key={link.id}>
 					<TableRowColumn>{link.title}</TableRowColumn>
@@ -63,7 +64,7 @@ class RebrandlyLinks extends Component{
 	componentWillMount()
 	
 	{
-		this.listlink()
+		//this.listlink()
 	}
 	
 	listlink(){
@@ -115,4 +116,9 @@ class RebrandlyLinks extends Component{
 
 
 }
-export default RebrandlyLinks;
+function mapStateToProps(state) {
+	return({
+		lists:state.linkReducers
+	})
+}
+export default connect(mapStateToProps)(RebrandlyLinks);
