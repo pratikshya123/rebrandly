@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 //import { BottomNavigationItem} from 'material-ui/BottomNavigation';
+import { bindActionCreators} from 'redux';
 import{ connect } from 'react-redux';
+import { listLinks} from '../../Actions/LinkAction'
 import EditIcon from 'material-ui/svg-icons/image/edit';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconButton from 'material-ui/IconButton';
-import {
+import{
 	Table,
 	TableBody,
 	TableHeader,
@@ -17,9 +19,9 @@ import Header from '../Header'
 class RebrandlyLinks extends Component{
 	constructor(props){
 		super(props)
-		this.state={
-			links:[],
-		}
+		// this.state={
+		// 	links:[],
+		// }
 	}
 	render(){
 		return(
@@ -65,6 +67,10 @@ class RebrandlyLinks extends Component{
 	
 	{
 		//this.listlink()
+	}
+
+	ComponentDidMount(){
+		this.props.listLinks()
 	}
 	
 	listlink(){
@@ -121,4 +127,12 @@ function mapStateToProps(state) {
 		lists:state.linkReducers
 	})
 }
-export default connect(mapStateToProps)(RebrandlyLinks);
+
+function mapDispatchToProps(dispatch){
+	return(
+		bindActionCreators({
+			listLinks: listLinks
+		},dispatch)
+		)
+}
+export default connect(mapStateToProps,mapDispatchToProps)(RebrandlyLinks);
